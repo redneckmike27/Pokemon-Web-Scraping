@@ -27,8 +27,13 @@ pkm_data['hoenn_num'] = int(hoenn_num)
 pkm_name = pointer[3].innerText.strip()
 pkm_data['pokemon_name'] = str(pkm_name)
 
-pointer = parser.getElementsByTagName('p')[0].getChildren()[1].getchildren()[5].getchildren()
+pointer = parser.getElementsByTagName('p')[0].getChildren()[1].getChildren()[5].getChildren()
 
+male_percent = pointer[0].innerText.strip()
+pkm_data['male_percent'] = str(male_percent)
+
+female_percent = pointer[1].innerText.strip()
+pkm_data['female_percent'] = str(female_percent)
 
 
 print(pkm_data)
