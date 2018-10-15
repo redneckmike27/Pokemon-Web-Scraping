@@ -9,7 +9,7 @@ def get_html_from_url(url):
     return html
 
 
-url = "https://www.serebii.net/pokedex-rs/001.shtml"
+url = "https://www.serebii.net/pokedex-rs/143.shtml"
 pkm_html = get_html_from_url(url)
 pkm_data = {}
 
@@ -56,7 +56,9 @@ weight = pointer[4].innerText.strip()
 pkm_data['weight'] = str(weight)
 
 next_pkm = parser.getElementsByTagName('p')[0].getChildren()[1].getChildren()[9].getChildren()[0].getChildren()[0].getChildren()[1]
-pkm_data['next pokemon'] = int(next_pkm)if [21:24] = int
+pkm_data['next pokemon'] = str(next_pkm)[21:24]
+    #if next_pkm = false
+     #   next_pkm = "none"
 
 pointer = parser.getElementsByTagName('p')[1].getChildren()[0].getChildren()[1].getChildren()
 
@@ -99,8 +101,14 @@ pkm_data['catch rate'] = str(catch_rate)
 egg1 = parser.getElementsByTagName('p')[12].getChildren()[0].getChildren()[2].getChildren()[1].innerText.strip()
 pkm_data['egg group 1'] = str(egg1)
 
-egg2 =  parser.getElementsByTagName('p')[12].getChildren()[0].getChildren()[3].getChildren()[1].innerText.strip()
-pkm_data['egg group 2'] = str(egg2)
+egg_groups_table_length = len(parser.getElementsByTagName('p')[12].getChildren()[0].getChildren())
+table_lenght = int(egg_groups_table_length)
+print(egg_groups_table_length)
+
+if table_lenght == 4:
+    egg2 =  parser.getElementsByTagName('p')[12].getChildren()[0].getChildren()[3].getChildren()[1].innerText.strip()
+    pkm_data['egg group 2'] = str(egg2)
+
 
 pointer = parser.getElementsByTagName('p')[13].getChildren()[1].getChildren()[2].getChildren()
 
