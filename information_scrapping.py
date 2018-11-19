@@ -61,9 +61,9 @@ def get_pokemon_data_from_html(html):
     weight = pointer[4].innerText.strip()
     pkm_data['weight'] = str(weight)
 
-    next_pkm = parser.getElementsByTagName('p')[0].getChildren()[1].getChildren()[9].getChildren()[0].getChildren()[
-        0].getChildren()[1]
-    net = str(next_pkm)[21:24]
+    #next_pkm = parser.getElementsByTagName('p')[0].getChildren()[1].getChildren()[9].getChildren()[0].getChildren()[
+    #    0].getChildren()[1]
+    #net = str(next_pkm)[21:24]
 
     pointer = parser.getElementsByTagName('p')[1].getChildren()[0].getChildren()[1].getChildren()
 
@@ -95,29 +95,65 @@ def get_pokemon_data_from_html(html):
     # def
     # tutor_att = {}
 
-    egg_steps = parser.getElementsByTagName('p')[11].getChildren()[0].getChildren()[1].getChildren()[
+    breaker = len(parser.getElementsByTagName('p'))
+    print breaker
+    find = int(breaker)
+
+    if find == 14:
+        one = 11
+        two = 12
+        three = 13
+
+    elif find == 9:
+        one = 6
+        two = 7
+        three = 8
+
+    elif find == 13:
+        one = 10
+        two = 11
+        three = 12
+
+    elif find == 12:
+        one = 9
+        two = 10
+        three = 11
+
+    else:
+        raise Exception("egg groups,steps,base stats,ect. p={}".format(find))
+
+
+
+    egg_steps = parser.getElementsByTagName('p')[one].getChildren()[0].getChildren()[1].getChildren()[
         0].innerText.strip()
     pkm_data['egg steps'] = str(egg_steps)
 
-    effort_points = parser.getElementsByTagName('p')[11].getChildren()[0].getChildren()[1].getChildren()[
+    effort_points = parser.getElementsByTagName('p')[one].getChildren()[0].getChildren()[1].getChildren()[
         1].innerText.strip()
     pkm_data['effort_points'] = str(effort_points)
 
-    catch_rate = parser.getElementsByTagName('p')[11].getChildren()[0].getChildren()[1].getChildren()[
+    catch_rate = parser.getElementsByTagName('p')[one].getChildren()[0].getChildren()[1].getChildren()[
         2].innerText.strip()
     pkm_data['catch rate'] = str(catch_rate)
 
-    egg1 = parser.getElementsByTagName('p')[12].getChildren()[0].getChildren()[2].getChildren()[1].innerText.strip()
+    egg1 = len(parser.getElementsByTagName('p')[two].getChildren()[0].getChildren()[2].getChildren())
+    if egg1 == 2:
+        four = 1
+        egg1 = parser.getElementsByTagName('p')[two].getChildren()[0].getChildren()[2].getChildren()[four].innertext
+
+
+    if egg1 == 1:
+        egg1 = "does not breed"
     pkm_data['egg group 1'] = str(egg1)
 
-    egg_groups_table_length = len(parser.getElementsByTagName('p')[12].getChildren()[0].getChildren())
+    egg_groups_table_length = len(parser.getElementsByTagName('p')[two].getChildren()[0].getChildren())
     table_lenght = int(egg_groups_table_length)
 
     if table_lenght == 4:
-        egg2 = parser.getElementsByTagName('p')[12].getChildren()[0].getChildren()[3].getChildren()[1].innerText.strip()
+        egg2 = parser.getElementsByTagName('p')[two].getChildren()[0].getChildren()[3].getChildren()[1].innerText.strip()
         pkm_data['egg group 2'] = str(egg2)
 
-    pointer = parser.getElementsByTagName('p')[13].getChildren()[1].getChildren()[2].getChildren()
+    pointer = parser.getElementsByTagName('p')[three].getChildren()[1].getChildren()[2].getChildren()
 
     base_hp = pointer[1].innerText
     pkm_data['base hp'] = int(base_hp)
@@ -143,7 +179,7 @@ def get_pokemon_data_from_html(html):
 
 if __name__ == "__main__":
 
-    for i in range(1, 101):
+    for i in range(1, 152):
         banks = str(i)
         if len(banks) == 1:
             banker = "00"+banks
@@ -170,9 +206,6 @@ if __name__ == "__main__":
 
 
 
-
-
-    print(bank)
 
 
 
